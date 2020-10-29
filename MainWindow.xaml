@@ -4,9 +4,10 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Peia_CarmenDenisa_Laborator2"
+        xmlns:CustomCommands="clr-namespace:Peia_CarmenDenisa_Laborator2.CustomCommands"
         mc:Ignorable="d"
         Title="Virtual Doughnuts Factory" Height="508" Width="882" ResizeMode="CanResizeWithGrip" Background="{DynamicResource {x:Static SystemColors.ActiveCaptionBrushKey}}" Loaded="frmMain_Loaded">
-    <Grid Margin="10,-24,46,168" Visibility="Visible">
+    <Grid Margin="10,-24,46,168" Visibility="Visible" MenuItem.Click="FilledItemsShow_Click">
 
         <Label x:Name="lblTitle" Content="Doughnuts - Bake &amp; Sale" FontSize="24" FontWeight="Bold" Margin="274,100,90,195"/>
 
@@ -22,7 +23,7 @@
         <Label x:Name="lblQuantity" Content="Quantity " Margin="66,336,676,-20"/>
         <TextBox x:Name="txtQuantity" TextWrapping="Wrap" Margin="130,326,638,-11" TextChanged="txtQuantity_TextChanged" KeyUp="txtQuantity_KeyPress"/>
         <Label x:Name="lblType" Content="Type" Margin="213,332,491,-25"/>
-        <ComboBox x:Name="cmbType" Margin="271,328,365,-11" RenderTransformOrigin="0.5,0.5"/>
+        <ComboBox x:Name="cmbType" Margin="271,328,365,-11" RenderTransformOrigin="0.5,0.5" SelectionChanged="cmbType_SelectionChanged"/>
         <Label x:Name="lblPrice" Content="Price" Margin="480,330,194,-30"/>
         <TextBox x:Name="txtPrice" Text="0" TextWrapping="Wrap" IsReadOnly="True" Margin="542,328,177,-9"/>
         <ListBox x:Name="lstSale" Margin="61,371,177,-102"/>
@@ -32,24 +33,32 @@
         <GroupBox x:Name="gbFilled_" Header="Filled " FontWeight="Bold" Margin="464,153,120,54"/>
         <Label x:Name="lblGlazedRaised" Content="Glazed " Margin="181,201,579,120"/>
         <TextBox x:Name="txtGlazedRaised" TextWrapping="Wrap" Margin="289,205,471,120" IsReadOnly="True" Text="0"/>
-        <Button x:Name="btnAddToSale" Content="Add To Sale " Margin="702,371,12,-55"/>
-        <Button x:Name="btnRemoveItem" Content="Remove Item " Margin="702,408,12,-90"/>
-        <Button x:Name="btnCheckOut" Content="Check Out" FontWeight="Bold" Margin="704,454,12,-148"/>
+        <Button x:Name="btnAddToSale" Content="Add To Sale " Margin="702,371,12,-55" Click="btnAdd_Click"/>
+        <Button x:Name="btnRemoveItem" Content="Remove Item " Margin="702,408,12,-90" Click=" btnRemoveItem_Click"/>
+        <Button x:Name="btnCheckOut" Content="Check Out" FontWeight="Bold" Margin="704,454,12,-148" Click=" btnCheckOut_Click"/>
         <Menu x:Name="mnuMain" HorizontalAlignment="Left" Height="21" VerticalAlignment="Top"
 Width="131" Margin="0,26,0,0">
             <MenuItem Header="File">
                 <MenuItem Header="Exit" Click="exitToolStripMenuItem_Click"/>
             </MenuItem>
-            <MenuItem Header="_Doughnuts">
+            <MenuItem Header="Doughnuts">
                 <MenuItem Header="Make">
                     <MenuItem Header="Raised">
                         <MenuItem x:Name="glazedToolStripMenuItem" Header="Glazed" Click="glazedToolStripMenuItem_Click"/>
                         <MenuItem x:Name="sugarToolStripMenuItem" Header="Sugar" Click="sugarToolStripMenuItem_Click"/>
                     </MenuItem>
-                    <MenuItem Header="Filled"/>
+                    <MenuItem Header="Filled" Click="FilledItems_Click"/>
+                    <MenuItem x:Name="lemonFilledMenuItem" Header="Lemon" IsCheckable="True"/>
+                    <MenuItem x:Name="chocolateFilledMenuItem" Header="Chocolate" IsCheckable="True"/>
+                    <MenuItem x:Name="vanillaFilledMenuItem" Header="Vanilla" IsCheckable="True"/>
+
+
                 </MenuItem>
-                <MenuItem x:Name="mnuStop" Header="Stop" Click="mnuStop_Click"/>
+                <MenuItem x:Name="mnuStop" Header="Stop" Click="mnuStop_Click" InputGestureText="Ctrl+S" Command="CustomCommands:StopCommand.Launch"/>
+                <MenuItem Header="Inventory" Command="ApplicationCommands.Print"></MenuItem>
+                
             </MenuItem>
+            
         </Menu>
     </Grid>
 </Window>
